@@ -33,7 +33,6 @@ angular.module('starter.controllers', [])
 .controller('LoginCtrl', function($scope,$window,$state) {
 
     $scope.login=function(){
-     $window.location.href = "/tab/dash";
      $state.go('tab.dash');
     };
   
