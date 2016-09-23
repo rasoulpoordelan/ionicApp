@@ -1,6 +1,6 @@
 angular.module('starter.services', [])
 
-.factory('Chats', function() {
+.factory('Chats', function($http) {
   // Might use a resource here that returns a JSON array
 
   // Some fake testing data
@@ -32,6 +32,31 @@ angular.module('starter.services', [])
   }];
 
   return {
+    list: function()
+    {
+    return  $http({
+            method: "GET",
+            url: "http://asreno.com/api/account/getaccounts",
+            crossDomain: true
+        });
+      //return $http.get('http://asreno.com/api/account/getaccounts');
+    /*  $http({
+          method: "GET",
+          url: "http://asreno.com/api/account/getaccounts",
+          crossDomain: true
+      }).then(function (response) {
+          //$rootScope.loggedIn = false;
+          // alert("success!");
+          //$window.location.href = '/#/login';
+          console.log(response.data);
+          return response.data;
+
+      }, function (err,status) {
+          //AlertView.error(err.msg, status);
+          console.log(err);
+      }); */
+
+    },
     all: function() {
       return chats;
     },

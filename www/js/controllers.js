@@ -14,6 +14,12 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
+
+  Chats.list().then(function(result) {
+    $scope.accounts = result.data.data;
+    console.log($scope.accounts);
+  });
+
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
@@ -30,13 +36,10 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope,$window,$state) {
+.controller('LoginCtrl', function($scope, $window, $state) {
 
-    $scope.login=function(){
-     $state.go('tab.dash');
-    };
-  
+  $scope.login = function() {
+    $state.go('tab.dash');
+  };
+
 });
-
-
-
