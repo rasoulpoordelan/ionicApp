@@ -6,7 +6,7 @@ angular.module('starter.services', [])
   // Some fake testing data
   var chats = [{
     id: 0,
-    name: 'Ben Sparrow',
+    name: 'Rasoul Poordelan',
     lastText: 'You on your way?',
     face: 'img/ben.png'
   }, {
@@ -32,30 +32,12 @@ angular.module('starter.services', [])
   }];
 
   return {
-    list: function()
-    {
-    return  $http({
-            method: "GET",
-            url: "http://asreno.com/api/account/getaccounts",
-            crossDomain: true
-        });
-      //return $http.get('http://asreno.com/api/account/getaccounts');
-    /*  $http({
-          method: "GET",
-          url: "http://asreno.com/api/account/getaccounts",
-          crossDomain: true
-      }).then(function (response) {
-          //$rootScope.loggedIn = false;
-          // alert("success!");
-          //$window.location.href = '/#/login';
-          console.log(response.data);
-          return response.data;
-
-      }, function (err,status) {
-          //AlertView.error(err.msg, status);
-          console.log(err);
-      }); */
-
+    list: function() {
+      return $http({
+        method: "GET",
+        url: "http://asreno.com/api/account/getaccounts",
+        crossDomain: true
+      });
     },
     all: function() {
       return chats;
@@ -71,5 +53,39 @@ angular.module('starter.services', [])
       }
       return null;
     }
+  };
+})
+
+.factory('Account', function($http) {
+
+  return {
+    list: function() {
+      return $http({
+        method: "GET",
+        url: "http://asreno.com/api/account/getaccounts",
+        crossDomain: true
+      });
+    },
+    get:function (id) {
+      return {"id" : 1,"name":"rasoul"};
+    }
+  };
+})
+
+.factory('Util', function($http,$ionicLoading) {
+  return {
+    showLoading: function() {
+      $ionicLoading.show({
+        content: 'Loading',
+        animation: 'fade-in',
+        showBackdrop: true,
+        maxWidth: 200,
+        showDelay: 0
+      });
+    },
+    hideLoading: function() {
+      $ionicLoading.hide();
+    }
+
   };
 });
