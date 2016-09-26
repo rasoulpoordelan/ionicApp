@@ -89,10 +89,10 @@ angular.module('starter.services', [])
     hideLoading: function() {
       $ionicLoading.hide();
     },
-    showAlert: function() {
+    showAlert: function(subject, content) {
       var alertPopup = $ionicPopup.alert({
-        title: 'Don\'t eat that!',
-        template: 'It might taste good'
+        title: subject,
+        template: content
       });
 
       alertPopup.then(function(res) {

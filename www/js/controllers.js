@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, Util) {
 
-  Util.showAlert();
+  Util.showAlert('Hello','im Rasoul');
 
 })
 
@@ -18,16 +18,22 @@ angular.module('starter.controllers', [])
       Util.hideLoading();
       console.log(err);
     }).finally(function() {
+    });
+  };
+
+  $scope.doRefresh = function() {
+    Account.list().then(function(result) {
+      $scope.accounts = result.data.data;
+      console.log($scope.accounts);
+    }).catch(function(err) {
+      console.log(err);
+    }).finally(function() {
       // Stop the ion-refresher from spinning
       $scope.$broadcast('scroll.refreshComplete');
     });
   };
 
   $scope.load();
-
-  $scope.doRefresh = function() {
-    $scope.load();
-  }
 
   //  AccountService.getAccounts();
   //  $scope.chats = Chats.all();
