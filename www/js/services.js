@@ -66,13 +66,16 @@ angular.module('starter.services', [])
         crossDomain: true
       });
     },
-    get:function (id) {
-      return {"id" : 1,"name":"rasoul"};
+    get: function(id) {
+      return {
+        "id": 1,
+        "name": "rasoul"
+      };
     }
   };
 })
 
-.factory('Util', function($http,$ionicLoading) {
+.factory('Util', function($http, $ionicLoading, $ionicPopup) {
   return {
     showLoading: function() {
       $ionicLoading.show({
@@ -85,7 +88,16 @@ angular.module('starter.services', [])
     },
     hideLoading: function() {
       $ionicLoading.hide();
-    }
+    },
+    showAlert: function() {
+      var alertPopup = $ionicPopup.alert({
+        title: 'Don\'t eat that!',
+        template: 'It might taste good'
+      });
 
+      alertPopup.then(function(res) {
+        console.log('Thank you for not eating my delicious ice cream cone');
+      });
+    }
   };
 });

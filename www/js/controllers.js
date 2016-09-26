@@ -1,10 +1,13 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {
+.controller('DashCtrl', function($scope, Util) {
+
+  Util.showAlert();
 
 })
 
-.controller('AccountsCtrl', function($scope, $timeout, Chats, Account, Util,AccountService) {
+.controller('AccountsCtrl', function($scope, $timeout, Chats, Account, Util) {
+
   $scope.load = function() {
     Util.showLoading();
     Account.list().then(function(result) {
@@ -14,12 +17,19 @@ angular.module('starter.controllers', [])
     }).catch(function(err) {
       Util.hideLoading();
       console.log(err);
+    }).finally(function() {
+      // Stop the ion-refresher from spinning
+      $scope.$broadcast('scroll.refreshComplete');
     });
   };
 
   $scope.load();
 
-  AccountService.getAccounts();
+  $scope.doRefresh = function() {
+    $scope.load();
+  }
+
+  //  AccountService.getAccounts();
   //  $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
